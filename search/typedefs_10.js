@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['xprkind_10729',['XprKind',['../db/dcf/struct_eigen_1_1internal_1_1traits_3_01stan_1_1math_1_1pinned__matrix_3_01_t_01_4_01_4.html#a866c7599840e2eeb168219961dc9f8cf',1,'Eigen::internal::traits&lt; stan::math::pinned_matrix&lt; T &gt; &gt;::XprKind()'],['../d3/d91/struct_eigen_1_1internal_1_1traits_3_01stan_1_1math_1_1_holder_3_01_arg_type_00_01_ptrs_8_8_8_01_4_01_4.html#a72d2cf7e5cf4d31d0e515cf8de10aa57',1,'Eigen::internal::traits&lt; stan::math::Holder&lt; ArgType, Ptrs... &gt; &gt;::XprKind()'],['../d5/d33/struct_eigen_1_1internal_1_1traits_3_01stan_1_1math_1_1arena__matrix_3_01_t_01_4_01_4.html#a550da3bc46a66add3095da5938ddb520',1,'Eigen::internal::traits&lt; stan::math::arena_matrix&lt; T &gt; &gt;::XprKind()']]],
+  ['xprtype_10730',['XprType',['../d3/d6d/struct_eigen_1_1internal_1_1evaluator_3_01stan_1_1math_1_1_holder_3_01_arg_type_00_01_ptrs_8_8_8_01_4_01_4.html#a1cb015a083d883e5c82434c0348f41ed',1,'Eigen::internal::evaluator&lt; stan::math::Holder&lt; ArgType, Ptrs... &gt; &gt;']]]
+];
