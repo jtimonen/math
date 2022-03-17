@@ -282,7 +282,9 @@ class cvodes_integrator {
 
       cvodes_set_options(cvodes_mem, max_num_steps_);
 
-      std::cout << "   - using CVodeSStolerances " << std::endl;
+      std::cout << "   - using CVodeSStolerances (rel_tol=";
+      std::cout << relative_tolerance_ << ", abs_tol=";
+      std::cout << absolute_tolerance_ << ")" << std::endl;
       check_flag_sundials(CVodeSStolerances(cvodes_mem, relative_tolerance_,
                                             absolute_tolerance_),
                           "CVodeSStolerances");
