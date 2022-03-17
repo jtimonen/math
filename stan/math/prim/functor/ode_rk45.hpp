@@ -69,6 +69,7 @@ ode_rk45_tol_impl(const char* function_name, const F& f, const T_y0& y0_arg,
   using boost::numeric::odeint::vector_space_algebra;
 
   using T_y0_t0 = return_type_t<T_y0, T_t0>;
+  std::cout << "* called ode_rk45_tol_impl()!" << std::endl;
 
   Eigen::Matrix<T_y0_t0, Eigen::Dynamic, 1> y0
       = y0_arg.template cast<T_y0_t0>();

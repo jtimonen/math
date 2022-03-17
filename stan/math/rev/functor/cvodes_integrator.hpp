@@ -208,6 +208,7 @@ class cvodes_integrator {
     check_finite(function_name, "initial state", y0_);
     check_finite(function_name, "initial time", t0_);
     check_finite(function_name, "times", ts_);
+    std::cout << " * called the constructor cvodes_integrator()! " << std::endl;
 
     // Code from: https://stackoverflow.com/a/17340003 . Should probably do
     // something better
@@ -281,6 +282,7 @@ class cvodes_integrator {
 
       cvodes_set_options(cvodes_mem, max_num_steps_);
 
+      std::cout << "   - using CVodeSStolerances " << std::endl;
       check_flag_sundials(CVodeSStolerances(cvodes_mem, relative_tolerance_,
                                             absolute_tolerance_),
                           "CVodeSStolerances");
@@ -293,15 +295,18 @@ class cvodes_integrator {
 
       // initialize forward sensitivity system of CVODES as needed
       if (num_y0_vars_ + num_args_vars_ > 0) {
+        std::cout << "   - using CVodeSensInit with CV_STAGGERED " << std::endl;
         check_flag_sundials(
             CVodeSensInit(
                 cvodes_mem, static_cast<int>(num_y0_vars_ + num_args_vars_),
                 CV_STAGGERED, &cvodes_integrator::cv_rhs_sens, nv_state_sens_),
             "CVodeSensInit");
 
+        std::cout << "   - using CVodeSetSensErrCon with SUNTRUE " << std::endl;
         check_flag_sundials(CVodeSetSensErrCon(cvodes_mem, SUNTRUE),
                             "CVodeSetSensErrCon");
 
+        std::cout << "   - using CVodeSensEEtolerances " << std::endl;
         check_flag_sundials(CVodeSensEEtolerances(cvodes_mem),
                             "CVodeSensEEtolerances");
       }

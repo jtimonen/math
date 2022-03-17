@@ -55,6 +55,7 @@ ode_bdf_tol_impl(const char* function_name, const F& f, const T_y0& y0,
                  long int max_num_steps,  // NOLINT(runtime/int)
                  std::ostream* msgs, const T_Args&... args) {
   const auto& args_ref_tuple = std::make_tuple(to_ref(args)...);
+  std::cout << " * called ode_bdf_tol_impl()! " << std::endl;
   return apply(
       [&](const auto&... args_refs) {
         cvodes_integrator<CV_BDF, F, T_y0, T_t0, T_ts, ref_type_t<T_Args>...>
