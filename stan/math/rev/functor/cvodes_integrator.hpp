@@ -315,7 +315,15 @@ class cvodes_integrator {
 
       double t_init = value_of(t0_);
       for (size_t n = 0; n < ts_.size(); ++n) {
+
         long int nsteps;
+        long int netfails;
+        long int nfevals;
+        long int nniters;
+        long int nncfails;
+        int qlast;
+        double tolsfac;
+
         double t_final = value_of(ts_[n]);
 
         if (t_final != t_init) {
@@ -336,8 +344,22 @@ class cvodes_integrator {
                 "CVodeGetSens");
           }
           CVodeGetNumSteps(cvodes_mem, &nsteps);
+          CVodeGetNumErrTestFails(cvodes_mem, &netfails);
+          CVodeGetNumRhsEvals(cvodes_mem, &nfevals);
+          CVodeGetLastOrder(cvodes_mem, &qlast);
+          CVodeGetTolScaleFactor(cvodes_mem, &tolsfac);
+          CVodeGetNumNonlinSolvIters(cvodes_mem, &nniters);
+          CVodeGetNumNonlinSolvConvFails(cvodes_mem, &nncfails);
+
           std::cout << "      > t_final = " << t_final;
-          std::cout << ", nsteps =  " << nsteps << std::endl;
+          std::cout << ", stats =  (" << nsteps;
+          std::cout << ", " << netfails;
+          std::cout << ", " << nfevals;
+          std::cout << ", " << qlast;
+          std::cout << ", " << tolsfac;
+          std::cout << ", " << nniters;
+          std::cout << ", " << nncfails;
+          std::cout << ")" << std::endl;
         }
 
         y.emplace_back(apply(
