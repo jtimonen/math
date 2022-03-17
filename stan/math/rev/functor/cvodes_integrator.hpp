@@ -315,6 +315,7 @@ class cvodes_integrator {
 
       double t_init = value_of(t0_);
       for (size_t n = 0; n < ts_.size(); ++n) {
+        long int nsteps;
         double t_final = value_of(ts_[n]);
 
         if (t_final != t_init) {
@@ -334,6 +335,9 @@ class cvodes_integrator {
                 CVodeGetSens(cvodes_mem, &t_init, nv_state_sens_),
                 "CVodeGetSens");
           }
+          CVodeGetNumSteps(cvodes_mem, &nsteps);
+          std::cout << "      > t_final = " << t_final;
+          std::cout << ", nsteps =  " << nsteps << std::endl;
         }
 
         y.emplace_back(apply(
