@@ -143,6 +143,7 @@ ode_rk45_tol_impl(const char* function_name, const F& f, const T_y0& y0_arg,
 
   const double step_size = 0.1;
   try {
+    std::cout << " > stan_math: calling integrate_times in Boost odeint!" << "\n";
     integrate_times(
         make_dense_output(absolute_tolerance, relative_tolerance,
                           runge_kutta_dopri5<std::vector<double>, double,

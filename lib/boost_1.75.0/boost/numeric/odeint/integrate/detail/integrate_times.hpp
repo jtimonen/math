@@ -126,7 +126,7 @@ size_t integrate_times(
         Observer observer , dense_output_stepper_tag
 )
 {   
-    std::cout << "called integrate_times for dense output stepper! << "\n";
+    std::cout << " > boost: called integrate_times for dense output stepper!" << "\n";
 
     typename odeint::unwrap_reference< Observer >::type &obs = observer;
     typename odeint::unwrap_reference< Stepper >::type &st = stepper;
