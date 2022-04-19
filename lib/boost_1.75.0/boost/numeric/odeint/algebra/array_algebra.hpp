@@ -57,6 +57,7 @@ struct array_algebra
             const Array< T , dim > &s2 ,
             const Array< T , dim > &s3 , Op op )
     {
+        std::cout << "  > called array_algebra/for_each3() with dim = " << dim << "\n";
         for( size_t i=0 ; i<dim ; ++i )
             op( s1[i] , s2[i] , s3[i] );
     }

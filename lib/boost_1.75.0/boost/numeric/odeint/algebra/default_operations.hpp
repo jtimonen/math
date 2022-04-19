@@ -440,11 +440,15 @@ struct default_operations
         void operator()( T3 &t3 , const T1 &t1 , const T2 &t2 ) const
         {
             using std::abs;
-            std::cout << " > called rel_error (for usage in for_each2)" << " with ";
-            std::cout << "t1 = " << get_unit_value(t1) << ", ";
-            std::cout << "t2 = " << get_unit_value(t2) << ", ";
-            std::cout << "t3 = " << get_unit_value(t3) << "\n";
-            set_unit_value( t3 , abs( get_unit_value( t3 ) ) / ( m_eps_abs + m_eps_rel * ( m_a_x * abs( get_unit_value( t1 ) ) + m_a_dxdt * abs( get_unit_value( t2 ) ) ) ) );
+            std::cout << " > called rel_error (for usage in for_each2) \n";
+
+            // JT: This formula is divided into more lines to make it more readable
+            // JT: this just turns the error x_err into relative error
+            auto num1 = abs( get_unit_value( t1 ) ); // x_old
+            auto num2 = abs( get_unit_value( t2 ) ); // dxdt_old
+            auto num3 = abs( get_unit_value( t3 ) ); // x_err (not relative)
+            auto rel_x_err = num3 / ( m_eps_abs + m_eps_rel * ( m_a_x * num1 + m_a_dxdt * num2 ) ); 
+            set_unit_value( t3 , rel_x_err);
         }
 
         typedef void result_type;

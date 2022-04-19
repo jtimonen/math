@@ -43,6 +43,7 @@ namespace detail {
     template< class Iterator1 , class Iterator2 , class Iterator3 , class Operation >
     inline void for_each3( Iterator1 first1 , Iterator1 last1 , Iterator2 first2 , Iterator3 first3, Operation op )
     {
+        std::cout << "  > called for_each3() from algebra/detail/for_each.hpp\n";
         for( ; first1 != last1 ; )
             op( *first1++ , *first2++ , *first3++ );
     }
