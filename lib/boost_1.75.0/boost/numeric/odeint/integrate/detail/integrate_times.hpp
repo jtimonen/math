@@ -126,7 +126,7 @@ size_t integrate_times(
         Observer observer , dense_output_stepper_tag
 )
 {   
-    //std::cout << " > boost: called integrate_times for dense output stepper!" << "\n";
+    std::cout << " > boost: called integrate_times for dense output stepper!" << "\n";
 
     typename odeint::unwrap_reference< Observer >::type &obs = observer;
     typename odeint::unwrap_reference< Stepper >::type &st = stepper;
@@ -146,6 +146,7 @@ size_t integrate_times(
     size_t count = 0;
     while( start_time != end_time )
     {
+        std::cout << "    * count = " << count << "\n";
         while( ( start_time != end_time ) && less_eq_with_sign( static_cast<time_type>(*start_time) , st.current_time() , st.current_time_step() ) )
         {
             st.calc_state( *start_time , start_state );

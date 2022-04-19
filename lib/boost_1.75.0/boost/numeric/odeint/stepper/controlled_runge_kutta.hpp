@@ -79,6 +79,7 @@ public:
     template< class State , class Deriv , class Err, class Time >
     value_type error( algebra_type &algebra , const State &x_old , const Deriv &dxdt_old , Err &x_err , Time dt ) const
     {
+        std::cout << "    - computing error" <<"\n";
         using std::abs;
         // this overwrites x_err !
         algebra.for_each3( x_err , x_old , dxdt_old ,
@@ -126,6 +127,7 @@ public:
         if(m_max_dt != static_cast<time_type >(0))
             // limit to maximal stepsize even when decreasing
             dt = detail::min_abs(dt, m_max_dt);
+        std::cout << "    - decreasing step to " << dt << "\n";
         return dt;
     }
 
@@ -151,6 +153,7 @@ public:
                 // limit to maximal stepsize
                 dt = detail::min_abs(dt, m_max_dt);
         }
+        std::cout << "    - increasing step to " << dt << "\n";
         return dt;
     }
 
