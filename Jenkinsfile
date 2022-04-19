@@ -255,6 +255,7 @@ pipeline {
                         docker {
                             image 'stanorg/ci:gpu'
                             label 'linux'
+                            args '--cap-add SYS_PTRACE'
                         }
                     }
                     when {
@@ -264,7 +265,7 @@ pipeline {
                     }
                     steps {
                         unstash 'MathSetup'
-                        //sh "echo CXXFLAGS += -fsanitize=address >> make/local"
+                        sh "echo CXXFLAGS += -fsanitize=address >> make/local"
                         script {
                             runTests("test/unit/math/rev", false)
                             runTests("test/unit/math/fwd", false)
@@ -277,6 +278,7 @@ pipeline {
                         docker {
                             image 'stanorg/ci:gpu'
                             label 'linux'
+                            args '--cap-add SYS_PTRACE'
                         }
                     }
                     when {
@@ -286,7 +288,7 @@ pipeline {
                     }
                     steps {
                         unstash 'MathSetup'
-                        //sh "echo CXXFLAGS += -fsanitize=address >> make/local"
+                        sh "echo CXXFLAGS += -fsanitize=address >> make/local"
                         script {
                             runTests("test/unit/math/mix", true)
                         }
@@ -298,6 +300,7 @@ pipeline {
                         docker {
                             image 'stanorg/ci:gpu'
                             label 'linux'
+                            args '--cap-add SYS_PTRACE'
                         }
                     }
                     when {
@@ -307,7 +310,7 @@ pipeline {
                     }
                     steps {
                         unstash 'MathSetup'
-                        //sh "echo CXXFLAGS += -fsanitize=address >> make/local"
+                        sh "echo CXXFLAGS += -fsanitize=address >> make/local"
                         script {
                             runTests("test/unit/*_test.cpp", false)
                             runTests("test/unit/math/*_test.cpp", false)
@@ -416,6 +419,7 @@ pipeline {
                         unstash 'MathSetup'
                         script {
                             sh "echo O=0 > make/local"
+                            sh "echo CXX=${CLANG_CXX} -Werror >> make/local"
                             sh "python ./test/code_generator_test.py"
                             sh "python ./test/signature_parser_test.py"
                             sh "python ./test/statement_types_test.py"
