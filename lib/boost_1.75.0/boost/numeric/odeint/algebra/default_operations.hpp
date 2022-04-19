@@ -440,6 +440,10 @@ struct default_operations
         void operator()( T3 &t3 , const T1 &t1 , const T2 &t2 ) const
         {
             using std::abs;
+            std::cout << " > called rel_error (for usage in for_each2)" << " with ";
+            std::cout << "t1 = " << get_unit_value(t1) << ", ";
+            std::cout << "t2 = " << get_unit_value(t2) << ", ";
+            std::cout << "t3 = " << get_unit_value(t3) << "\n";
             set_unit_value( t3 , abs( get_unit_value( t3 ) ) / ( m_eps_abs + m_eps_rel * ( m_a_x * abs( get_unit_value( t1 ) ) + m_a_dxdt * abs( get_unit_value( t2 ) ) ) ) );
         }
 
@@ -469,6 +473,7 @@ struct default_operations
         template< class T1 , class T2 , class T3 >
         void operator()( T3 &t3 , const T1 &t1 , const T2 &t2 ) const
         {
+            std::cout << " > called default_rel_error (for usage in for_each3, rosenbrock)" << "\n";
             BOOST_USING_STD_MAX();
             using std::abs;
             Fac1 x1 = abs( get_unit_value( t1 ) ) , x2 = abs( get_unit_value( t2 ) );

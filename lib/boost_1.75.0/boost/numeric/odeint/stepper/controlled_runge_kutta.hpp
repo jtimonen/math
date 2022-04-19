@@ -79,15 +79,23 @@ public:
     template< class State , class Deriv , class Err, class Time >
     value_type error( algebra_type &algebra , const State &x_old , const Deriv &dxdt_old , Err &x_err , Time dt ) const
     {
-        std::cout << "    - computing error" <<"\n";
+        std::cout << " * COMPUTING RELATIVE ERROR" <<"\n";
         using std::abs;
         // this overwrites x_err !
+            std::cout << "  - calling algebra.for_each3() with dt = " << dt << " and\n";
+            std::cout << "  m_eps_rel = " << m_eps_rel << ", ";
+            std::cout << "m_eps_abs = " << m_eps_abs << ", ";
+            std::cout << "m_a_x = " << m_a_x << ", ";
+            std::cout << "m_a_dxdt = " << m_a_dxdt << "\n";
+            //std::cout << "  - x_old = " << x_old << "\n";
         algebra.for_each3( x_err , x_old , dxdt_old ,
                 typename operations_type::template rel_error< value_type >( m_eps_abs , m_eps_rel , m_a_x , m_a_dxdt * abs(get_unit_value( dt )) ) );
 
         // value_type res = algebra.reduce( x_err ,
         //        typename operations_type::template maximum< value_type >() , static_cast< value_type >( 0 ) );
-        return algebra.norm_inf( x_err );
+        auto val = algebra.norm_inf( x_err );
+        std::cout << "  - relative error (val) is " << val << "\n";
+        return val;
     }
 
 private:
@@ -152,8 +160,9 @@ public:
             if(m_max_dt != static_cast<time_type >(0))
                 // limit to maximal stepsize
                 dt = detail::min_abs(dt, m_max_dt);
+            std::cout << "    - increasing step to " << dt << "\n";
         }
-        std::cout << "    - increasing step to " << dt << "\n";
+        
         return dt;
     }
 
